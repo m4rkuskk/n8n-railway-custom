@@ -25,6 +25,10 @@ ENV N8N_BASIC_AUTH_PASSWORD=$PASSWORD
 
 ENV N8N_USER_ID=root
 
+ENV EXECUTIONS_DATA_PRUNE=true
+ENV EXECUTIONS_DATA_MAX_AGE=24
+
+
 RUN apk add --update graphicsmagick tzdata
 
 USER root
