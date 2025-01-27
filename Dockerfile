@@ -7,6 +7,8 @@ ARG PGPORT
 ARG PGDATABASE
 ARG PGUSER
 
+ARG NODE_PGVERSION=8.13.0
+
 ARG USERNAME
 ARG PASSWORD
 ARG ENCRYPTIONKEY
@@ -27,7 +29,7 @@ ENV N8N_USER_ID=root
 
 ENV EXECUTIONS_DATA_PRUNE=true
 ENV EXECUTIONS_DATA_MAX_AGE=24
-
+ENV NODE_FUNCTION_ALLOW_EXTERNAL=*
 
 RUN apk add --update graphicsmagick tzdata
 
@@ -35,6 +37,7 @@ USER root
 
 RUN apk --update add --virtual build-dependencies python3 build-base && \
     npm_config_user=root npm install --location=global n8n@${N8N_VERSION} && \
+    npm install --location=global pg@8${NODE_PGVERSION} && \
     apk del build-dependencies
 
 WORKDIR /data
